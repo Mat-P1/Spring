@@ -7,6 +7,7 @@ Learn Spring, Spring Core, Spring REST, Spring MVC, Spring Security, Thymeleaf, 
   - [1. Spring Boot Quick Start](#1-spring-boot-quick-start)
   - [2. Spring Core](#2-spring-core)
   - [3. Hibernate/JPA CRUD](#3-hibernatejpa-crud)
+  - [4. REST CRUD APIs](#4-rest-crud-apis)
 
 ## 1. Spring Boot Quick Start
 
@@ -51,4 +52,7 @@ Learn Spring, Spring Core, Spring REST, Spring MVC, Spring Security, Thymeleaf, 
    * SQL and MySQL
    * JPA Annotations
    * Simple CRUD Application with Data Access Object (DAO) pattern
-   *  
+   * JPA Query Language (JPQL)
+   * Auto generating databases with Hibernate/JPA
+
+## 4. REST CRUD APIs
