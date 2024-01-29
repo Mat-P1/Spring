@@ -50,5 +50,5 @@ Learn Spring, Spring Core, Spring REST, Spring MVC, Spring Security, Thymeleaf, 
    * JDBC
    * SQL and MySQL
    * JPA Annotations
-   * Simple CRUD Application with Data Access Objectt (DAO) pattern
- 
+   * Simple CRUD Application with Data Access Object (DAO) pattern
+   *  
