@@ -2,13 +2,14 @@
 
 Spring Core, Spring REST, Spring MVC, Spring Security, Thymeleaf, JPA, Hibernate and MySQL. 
 
-Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MVC, AOP, Hibernate/JPA and Maven.
+Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MVC, AOP, Hibernate/JPA, Postman and Maven.
 
 **Table of Contents**
 - [Spring Boot, Spring \& Hibernate](#spring-boot-spring--hibernate)
   - [1. Spring Boot Quick Start](#1-spring-boot-quick-start)
   - [2. Spring Core](#2-spring-core)
   - [3. Hibernate/JPA CRUD](#3-hibernatejpa-crud)
+  - [4. REST CRUD APIs](#4-rest-crud-apis)
 
 ## 1. Spring Boot Quick Start
 
@@ -55,3 +56,14 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
    * Simple CRUD Application with Data Access Object (DAO) pattern
    * JPA Query Language (JPQL)
    * Auto generating databases with Hibernate/JPA
+
+## 4. REST CRUD APIs
+
+   * What is REST?
+   * JSON
+   * REST HTTP
+   * Postman
+   * JSON Data Binding (To Java POJO)
+   * Jackson Project
+   * Path Variables
+   * Exception Handling
