@@ -67,3 +67,5 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
    * Jackson Project
    * Path Variables
    * Exception Handling
+   * Service Layer
+   * CRUD application (employee-crud) with Hibernate/JPA, DevTools, MySQL, REST APIs, Data Access Object (DAO) pattern and Service layers

@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.spring.udemy.restapi</groupId>
-    <artifactId>students-crud</artifactId>
+    <artifactId>students</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>students-crud</name>
     <description>students-crud</description>
