@@ -76,4 +76,7 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
 ## 5. REST API Security
 
    * REST API Security Overview
-   * 
+   * Securing APIs with Spring Security
+   * Users, roles and passwords
+   * Database connection for users, roles and passwords
+   * Password encryption with BCrypt
