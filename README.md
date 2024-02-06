@@ -10,6 +10,7 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
   - [2. Spring Core](#2-spring-core)
   - [3. Hibernate/JPA CRUD](#3-hibernatejpa-crud)
   - [4. REST CRUD APIs](#4-rest-crud-apis)
+  - [5. REST API Security](#5-rest-api-security)
 
 ## 1. Spring Boot Quick Start
 
@@ -71,3 +72,8 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
    * CRUD application (employee-crud) with Hibernate/JPA, DevTools, MySQL, REST APIs, Data Access Object (DAO) pattern and Service layers
    * Spring Data JPA
    * Updated employee-crud (`employee-crud -> employee-crud-updated`) with Spring Data JPA and Spring Data REST
+
+## 5. REST API Security
+
+   * REST API Security Overview
+   * 
