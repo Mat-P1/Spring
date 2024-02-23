@@ -1,5 +1,6 @@
 package com.spring.udemy.springmvc;
 
+import com.spring.udemy.springmvc.validation.CourseCode;
 import jakarta.validation.constraints.*;
 
 public class Customer {
@@ -18,13 +19,17 @@ public class Customer {
     @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only five (5) chars/digits")
     private String postalCode;
 
+    @CourseCode // @CourseCode(value = "TOPS", message = "must start with TOPS"). Default value provided but can be customized as show here
+    private String courseCode;
+
     public Customer() {}
 
-    public Customer(String firstName, String lastName, Integer freePasses, String postalCode) {
+    public Customer(String firstName, String lastName, Integer freePasses, String postalCode, String courseCode) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.freePasses = freePasses;
         this.postalCode = postalCode;
+        this.courseCode = courseCode;
     }
 
     public String getFirstName() {
@@ -57,5 +62,13 @@ public class Customer {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 }

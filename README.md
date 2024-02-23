@@ -91,3 +91,4 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
    * Working with Spring MVC and HTML tags
    * Validations
    * Regular Expressions (Regex)
+   * Custom validations
