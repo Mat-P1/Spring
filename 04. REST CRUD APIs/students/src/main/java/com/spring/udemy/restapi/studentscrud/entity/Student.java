@@ -6,7 +6,6 @@ public class Student {
     private String lastName;
 
     // Constructors
-
     public Student() {}
 
     public Student(String firstName, String lastName) {
@@ -15,7 +14,6 @@ public class Student {
     }
 
     // Getters and Setters
-
     public String getFirstName() {
         return firstName;
     }

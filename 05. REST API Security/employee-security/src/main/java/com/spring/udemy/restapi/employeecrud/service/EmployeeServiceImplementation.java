@@ -12,17 +12,14 @@ import java.util.Optional;
 public class EmployeeServiceImplementation implements EmployeeService {
 
     // Define field for EmployeeDAO
-
     private final EmployeeRepository employeeRepository;
 
     // Set up constructor for dependency injection
-
     public EmployeeServiceImplementation(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 
     // Methods
-
     @Override
     public List<Employee> findAll() {
         return employeeRepository.findAll();

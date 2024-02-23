@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ThymeleafController {
 
     // Create a mapping for "/hello"
-
     @GetMapping("/hello")
     public String sayHello(Model model) {
 

@@ -11,17 +11,14 @@ import java.util.List;
 public class EmployeeServiceImplementation implements EmployeeService {
 
     // Define field for EmployeeDAO
-
     private final EmployeeDAO employeeDAO;
 
     // Set up constructor for dependency injection
-
     public EmployeeServiceImplementation(EmployeeDAO employeeDAO) {
         this.employeeDAO = employeeDAO;
     }
 
     // Methods
-
     @Override
     public List<Employee> findAll() {
         return employeeDAO.findAll();

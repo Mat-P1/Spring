@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoRestController {
 
     // Inject properties for: coach.name and team.name
-
     @Value("${coach.name}")
     private String coachName;
 
@@ -16,28 +15,24 @@ public class DemoRestController {
     private String teamName;
 
     // Expose new endpoint for "teaminfo"
-
     @GetMapping("/teaminfo")
     public String getTeamInfo() {
         return "Coach: " + coachName + ", Team name: " + teamName;
     }
 
     // Expose "/" endpoint that return a "Hello, World!" value.
-
     @GetMapping("/")
     public String sayHello() {
         return "Hello, World!";
     }
 
     // Expose new endpoint for "workout"
-
     @GetMapping("/workout")
     public String getDailyWorkout() {
         return "Run a hard 5K!";
     }
 
     // Expose new endpoint for "fortune"
-
     @GetMapping("/fortune")
     public String getDailyFortune() {
         return "Today is your lucky day! springbootdemo";

@@ -12,27 +12,22 @@ import java.util.List;
 public class EmployeeDAOImplementation implements EmployeeDAO {
 
     // Define field for Entity Manager
-
     private final EntityManager entityManager;
 
     // Set up constructor for dependency injection
-
     @Autowired
     public EmployeeDAOImplementation(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     // Methods
-
     @Override
     public List<Employee> findAll() {
 
         // Create a query
-
         TypedQuery<Employee> findAllQuery = entityManager.createQuery("FROM Employee", Employee.class);
 
         // Execute query and return results
-
         return findAllQuery.getResultList();
     }
 
@@ -40,7 +35,6 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     public Employee findById(int id) {
 
         // GET and return employee
-
         return entityManager.find(Employee.class, id);
     }
 
@@ -48,7 +42,6 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     public Employee save(Employee employee) {
 
         // Insert/Update and return Employee
-
         return entityManager.merge(employee);
     }
 
@@ -56,11 +49,9 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
     public void deleteById(int id) {
 
         // Find employee by id
-
         Employee employee = entityManager.find(Employee.class, id);
 
         // Remove employee
-
         entityManager.remove(employee);
     }
 }

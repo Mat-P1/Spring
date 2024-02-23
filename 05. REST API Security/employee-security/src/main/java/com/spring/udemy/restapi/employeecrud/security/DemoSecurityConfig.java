@@ -19,20 +19,17 @@ import javax.sql.DataSource;
 public class DemoSecurityConfig {
 
     // Support for JDBC
-
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
 
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
         // Define query to retrieve a user by username
-
         jdbcUserDetailsManager.setUsersByUsernameQuery (
                 "SELECT user_id, pw, active FROM members WHERE user_id=?"
         );
 
         // Define query to retrieve the authorities/roles by username
-
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery (
                 "SELECT user_id, role FROM roles WHERE user_id=?"
         );
@@ -41,7 +38,6 @@ public class DemoSecurityConfig {
     }
 
     // Hard coded users, roles and passwords (For learning purposes)
-
     /* @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
 
@@ -67,7 +63,6 @@ public class DemoSecurityConfig {
     } */
 
     // Role filter
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -81,12 +76,10 @@ public class DemoSecurityConfig {
         );
 
         // use HTTP Basic Authentication
-
         http.httpBasic(Customizer.withDefaults());
 
         // Disable Cross Site Request Forgery (CSRF)
         // Generally not required for stateless REST APIs that use POST, PUT, DELETE and/or PATCH
-
         http.csrf(AbstractHttpConfigurer::disable);
 
         return http.build();

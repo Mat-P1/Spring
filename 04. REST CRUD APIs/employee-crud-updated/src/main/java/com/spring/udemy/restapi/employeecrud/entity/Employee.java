@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 public class Employee {
 
     // Define fields
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -23,7 +22,6 @@ public class Employee {
     private String email;
 
     // Constructors
-
     public Employee() {}
 
     public Employee(String firstName, String lastName, String email) {
@@ -33,7 +31,6 @@ public class Employee {
     }
 
     // Getters and Setters
-
     public int getId() {
         return id;
     }
@@ -67,7 +64,6 @@ public class Employee {
     }
 
     // Methods
-
     @Override
     public String toString() {
         return "Employee{" +
