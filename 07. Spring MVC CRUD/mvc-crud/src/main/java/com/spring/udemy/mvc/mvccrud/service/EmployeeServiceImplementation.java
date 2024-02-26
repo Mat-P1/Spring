@@ -20,7 +20,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
     @Override
     public List<Employee> findAll() {
-        return employeeRepository.findAll();
+        return employeeRepository.findAllByOrderByLastNameAsc();
     }
 
     @Override
@@ -41,8 +41,8 @@ public class EmployeeServiceImplementation implements EmployeeService {
     }
 
     @Override
-    public Employee save(Employee employee) {
-        return employeeRepository.save(employee);
+    public void save(Employee employee) {
+        employeeRepository.save(employee);
     }
 
     @Override
