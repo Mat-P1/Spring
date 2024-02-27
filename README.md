@@ -13,6 +13,7 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
   - [5. REST API Security](#5-rest-api-security)
   - [6. Spring MVC](#6-spring-mvc)
   - [7. Spring MVC CRUD](#7-spring-mvc-crud)
+  - [8. Spring MVC Security](#8-spring-mvc-security)
 
 ## 1. Spring Boot Quick Start
 
@@ -97,3 +98,7 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
 ## 7. Spring MVC CRUD
 
    * CRUD application using Spring MVC, Thymeleaf, MySQL, Hibernate/JPA, DevTools, Bootstrap, Data Access Object (DAO) pattern and Service layers
+
+## 8. Spring MVC Security
+
+   * Overview of Spring Security features for Spring MVC
