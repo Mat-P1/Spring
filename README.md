@@ -102,3 +102,5 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
 ## 8. Spring MVC Security
 
    * Overview of Spring Security features for Spring MVC
+   * Users, roles and passwords
+   * Logout
