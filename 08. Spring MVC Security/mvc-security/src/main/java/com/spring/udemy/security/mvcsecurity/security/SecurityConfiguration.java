@@ -43,12 +43,16 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(configurer -> configurer
+                        .requestMatchers("/home").hasRole("EMPLOYEE")
+                        .requestMatchers("/leaders/**").hasRole("MANAGER")
+                        .requestMatchers("/systems/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                         .formLogin(form -> form
                                   .loginPage("/loginPage")
                                   .loginProcessingUrl("/authenticateUser")
                                   .permitAll())
-                        .logout(LogoutConfigurer::permitAll);
+                        .logout(LogoutConfigurer::permitAll)
+                        .exceptionHandling(configurer -> configurer.accessDeniedPage("/access-denied"));
         return http.build();
     }
 }
