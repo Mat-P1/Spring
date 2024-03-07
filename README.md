@@ -14,6 +14,7 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
   - [6. Spring MVC](#6-spring-mvc)
   - [7. Spring MVC CRUD](#7-spring-mvc-crud)
   - [8. Spring MVC Security](#8-spring-mvc-security)
+  - [9. JPA/Hibernate Advanced Mappings](#9-jpahibernate-advanced-mappings)
 
 ## 1. Spring Boot Quick Start
 
@@ -105,4 +106,8 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
    * Users, roles and passwords
    * Login and Logout
    * Blocking and displaying content based on roles
-   
+   * Database connection for users, roles and passwords
+   * Custom Tables for users, roles and passwords
+   * Password encryption with BCrypt
+
+## 9. JPA/Hibernate Advanced Mappings
