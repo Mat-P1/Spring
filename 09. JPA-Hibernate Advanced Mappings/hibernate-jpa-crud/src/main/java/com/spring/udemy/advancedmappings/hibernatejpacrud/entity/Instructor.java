@@ -21,7 +21,7 @@ public class Instructor {
     @Column(name = "email")
     private String email;
 
-    /** Set up relation between instructor and instructor_detail */
+    /** Set up one-to-one relation between instructor and instructor_detail */
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "instructor_detail_id")
     private InstructorDetail instructorDetail;

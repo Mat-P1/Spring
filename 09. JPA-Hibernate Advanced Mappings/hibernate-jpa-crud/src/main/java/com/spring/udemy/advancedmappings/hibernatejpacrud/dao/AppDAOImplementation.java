@@ -1,6 +1,7 @@
 package com.spring.udemy.advancedmappings.hibernatejpacrud.dao;
 
 import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Instructor;
+import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,24 @@ public class AppDAOImplementation implements AppDAO {
 
         // Delete instructor
         entityManager.remove(instructor);
+    }
+
+    @Override
+    public InstructorDetail findInstructorDetailById(int id) {
+        return entityManager.find(InstructorDetail.class, id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteInstructorDetailById(int id) {
+
+        // Retrieve instructor detail
+        InstructorDetail instructorDetail = entityManager.find(InstructorDetail.class, id);
+
+        // Remove associated object reference and break bidirectional link
+        instructorDetail.getInstructor().setInstructorDetail(null);
+
+        // Delete instructor detail
+        entityManager.remove(instructorDetail);
     }
 }

@@ -115,5 +115,5 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
    * One-to-One
    * Cascading
    * Eager and Lazy loading
-   * Uni-Directional and Bi-Directional
+   * Unidirectional and Bidirectional references
    * Entity Lifecycle

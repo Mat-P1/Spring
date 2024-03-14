@@ -1,8 +1,8 @@
-DROP SCHEMA IF EXISTS `one-to-one-uni`;
+DROP SCHEMA IF EXISTS `one-to-one`;
 
-CREATE SCHEMA `one-to-one-uni`;
+CREATE SCHEMA `one-to-one`;
 
-use `one-to-one-uni`;
+use `one-to-one`;
 
 SET FOREIGN_KEY_CHECKS = 0;
 

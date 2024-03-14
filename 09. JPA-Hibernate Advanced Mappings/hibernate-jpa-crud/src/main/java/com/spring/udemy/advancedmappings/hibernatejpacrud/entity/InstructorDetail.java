@@ -18,6 +18,11 @@ public class InstructorDetail {
     @Column(name = "hobby")
     private String hobby;
 
+    /** Set up bidirectional relationship between InstructorDetail and Instructor */
+    // Set up CascadeType to everything but remove
+    @OneToOne(mappedBy = "instructorDetail", /*cascade = CascadeType.ALL*/ cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private Instructor instructor;
+
     public InstructorDetail() {}
 
     public InstructorDetail(String youtubeChannel, String hobby) {
@@ -47,6 +52,14 @@ public class InstructorDetail {
 
     public void setHobby(String hobby) {
         this.hobby = hobby;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 
     @Override
