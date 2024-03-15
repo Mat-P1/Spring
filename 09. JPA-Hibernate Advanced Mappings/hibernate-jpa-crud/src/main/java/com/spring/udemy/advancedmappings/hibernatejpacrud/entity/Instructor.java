@@ -2,6 +2,9 @@ package com.spring.udemy.advancedmappings.hibernatejpacrud.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /** Annotate class as an entity and map to db table */
 @Entity
 @Table(name = "instructor")
@@ -21,10 +24,17 @@ public class Instructor {
     @Column(name = "email")
     private String email;
 
-    /** Set up one-to-one relation between instructor and instructor_detail */
+    /** Set up one-to-one relationship between instructor and instructor_detail */
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "instructor_detail_id")
     private InstructorDetail instructorDetail;
+
+    /** Set up one-to-many relationship between instructor and course */
+    @OneToMany(mappedBy = "instructor",
+               fetch = FetchType.LAZY,
+               cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                          CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Course> courses;
 
     public Instructor() {}
 
@@ -70,8 +80,29 @@ public class Instructor {
         return instructorDetail;
     }
 
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
     public void setInstructorDetail(InstructorDetail instructorDetail) {
         this.instructorDetail = instructorDetail;
+    }
+
+    // Convenience methods for bidirectional relationships
+
+    public void addCourse(Course course) {
+
+        if (courses == null) {
+            courses = new ArrayList<>();
+        }
+
+        // Setup relationship between course object and instructor object
+        courses.add(course);
+        course.setInstructor(this);
     }
 
     @Override

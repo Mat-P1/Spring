@@ -1,11 +1,15 @@
 package com.spring.udemy.advancedmappings.hibernatejpacrud.dao;
 
+import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Course;
 import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Instructor;
 import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class AppDAOImplementation implements AppDAO {
@@ -56,5 +60,32 @@ public class AppDAOImplementation implements AppDAO {
 
         // Delete instructor detail
         entityManager.remove(instructorDetail);
+    }
+
+    @Override
+    public List<Course> findCoursesByInstructorId(int id) {
+
+        // Create query
+        TypedQuery<Course> findCoursesByInstructorIdQuery = entityManager.createQuery(
+                        "FROM Course WHERE instructor.id = :data", Course.class);
+        findCoursesByInstructorIdQuery.setParameter("data", id);
+
+        // Execute query
+        return findCoursesByInstructorIdQuery.getResultList();
+    }
+
+    @Override
+    public Instructor findInstructorByIdJoinFetch(int id) {
+
+        // Create query
+        TypedQuery<Instructor> findInstructorByIdJoinFetchQuery = entityManager.createQuery(
+                "SELECT i FROM Instructor i " +
+                   "JOIN FETCH i.courses " +
+                   "JOIN FETCH i.instructorDetail " +
+                   "WHERE i.id = :data", Instructor.class);
+        findInstructorByIdJoinFetchQuery.setParameter("data", id);
+
+        // Execute query
+        return findInstructorByIdJoinFetchQuery.getSingleResult();
     }
 }

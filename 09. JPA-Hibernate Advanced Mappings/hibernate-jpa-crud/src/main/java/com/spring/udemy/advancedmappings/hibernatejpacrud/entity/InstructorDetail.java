@@ -20,7 +20,9 @@ public class InstructorDetail {
 
     /** Set up bidirectional relationship between InstructorDetail and Instructor */
     // Set up CascadeType to everything but remove
-    @OneToOne(mappedBy = "instructorDetail", /*cascade = CascadeType.ALL*/ cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToOne(mappedBy = "instructorDetail", /*cascade = CascadeType.ALL*/
+                                             cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                                                        CascadeType.PERSIST, CascadeType.REFRESH})
     private Instructor instructor;
 
     public InstructorDetail() {}

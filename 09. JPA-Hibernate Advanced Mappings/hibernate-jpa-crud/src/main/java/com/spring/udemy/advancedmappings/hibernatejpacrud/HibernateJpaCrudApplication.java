@@ -1,12 +1,15 @@
 package com.spring.udemy.advancedmappings.hibernatejpacrud;
 
 import com.spring.udemy.advancedmappings.hibernatejpacrud.dao.AppDAO;
+import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Course;
 import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Instructor;
 import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.util.List;
 
 @SpringBootApplication
 public class HibernateJpaCrudApplication {
@@ -18,17 +21,21 @@ public class HibernateJpaCrudApplication {
     @Bean
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
         // First create instructor then test the other methods
-        return runner ->  createInstructor(appDAO);
+        return runner -> // createInstructor(appDAO);
                          // findInstructor(appDAO);
                          // deleteInstructor(appDAO);
                          // findInstructorDetail(appDAO);
-                         //  deleteInstructorDetail(appDAO);
+                         // deleteInstructorDetail(appDAO);
+                         // createInstructorWithCourses(appDAO);
+                         // findInstructorWithCourses(appDAO);
+                         // findCoursesForInstructor(appDAO);
+         findInstructorWithCoursesJoinFetch(appDAO);
     }
 
     private void createInstructor(AppDAO appDAO) {
 
         // Create instructor
-        Instructor instructor1 = new Instructor("Roy", "Mustang", "mat@email.com");
+        Instructor instructor1 = new Instructor("Roy", "Mustang", "roy@email.com");
         Instructor instructor2 = new Instructor("Edward", "Elric", "ed@email.com");
         Instructor instructor3 = new Instructor("Alphonse", "Elric", "al@email.com");
 
@@ -42,7 +49,7 @@ public class HibernateJpaCrudApplication {
         instructor2.setInstructorDetail(instructorDetail2);
         instructor3.setInstructorDetail(instructorDetail3);
 
-        // Save instructor. This will also dave details object because CascadeType.ALL
+        // Save instructor. This will also save details and courses because CascadeType.PERSIST
         System.out.println("Saving instructor: " + instructor1 + "\n" + instructor2 + "\n" + instructor3);
         appDAO.save(instructor1);
         appDAO.save(instructor2);
@@ -93,5 +100,81 @@ public class HibernateJpaCrudApplication {
         appDAO.deleteInstructorDetailById(id);
 
         System.out.println("Done. Instructor's details deleted.");
+    }
+
+    private void createInstructorWithCourses(AppDAO appDAO) {
+
+        // Create instructor
+        Instructor instructor4 = new Instructor("Mat", "Mustang", "roy@email.com");
+        Instructor instructor5 = new Instructor("Roy", "Elric", "ed@email.com");
+        Instructor instructor6 = new Instructor("Alfred", "Elric", "al@email.com");
+
+        // Create instructor details
+        InstructorDetail instructorDetail4 = new InstructorDetail("https://www.youtube.com/mat", "Kotlin");
+        InstructorDetail instructorDetail5 = new InstructorDetail("https://www.youtube.com/roy", "Java");
+        InstructorDetail instructorDetail6 = new InstructorDetail("https://www.youtube.com/alf", "Python");
+
+        // Associate objects
+        instructor4.setInstructorDetail(instructorDetail4);
+        instructor5.setInstructorDetail(instructorDetail5);
+        instructor6.setInstructorDetail(instructorDetail6);
+
+        // Create some courses
+        Course course1 = new Course("OOP");
+        Course course2 = new Course("Data Structures");
+        Course course3 = new Course("Agile");
+        Course course4 = new Course("Paradigms");
+        Course course5 = new Course("Algorithms");
+        Course course6 = new Course("Statistics");
+
+        // Add course to instructor
+        instructor4.addCourse(course1);
+        instructor4.addCourse(course2);
+        instructor5.addCourse(course3);
+        instructor5.addCourse(course4);
+        instructor6.addCourse(course5);
+        instructor6.addCourse(course6);
+
+        // Save instructor. This will also save details and courses because CascadeType.PERSIST
+        System.out.println("Saving instructor with courses: " + instructor4 + "\n" + instructor4.getCourses()
+        + "\n" + instructor5 + "\n" + instructor5.getCourses() + "\n" + instructor6 + "\n" + instructor6.getCourses());
+        appDAO.save(instructor4);
+        appDAO.save(instructor5);
+        appDAO.save(instructor6);
+        System.out.println("...done");
+    }
+
+    private void findInstructorWithCourses(AppDAO appDAO) {
+
+        int id = 1;
+        System.out.println("Finding instructor with courses: " + id);
+
+        Instructor instructor = appDAO.findInstructorById(id);
+        System.out.println("Instructor: " + instructor + "\nCourses: " + instructor.getCourses());
+    }
+
+    private void findCoursesForInstructor(AppDAO appDAO) {
+
+        int id = 1;
+        System.out.println("Finding instructor with courses: " + id);
+
+        Instructor instructor = appDAO.findInstructorById(id);
+        System.out.println("Instructor: " + instructor);
+
+        // Find courses for instructor
+        List<Course> courses = appDAO.findCoursesByInstructorId(id);
+        instructor.setCourses(courses);
+        System.out.println("Associated courses: " + instructor.getCourses());
+    }
+
+    private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
+
+        int id = 1;
+        System.out.println("Finding instructor with courses: " + id);
+
+        Instructor instructor = appDAO.findInstructorByIdJoinFetch(id);
+        System.out.println("Instructor: " + instructor);
+
+        System.out.println("Associated courses: " + instructor.getCourses());
     }
 }

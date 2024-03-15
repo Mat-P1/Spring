@@ -1,7 +1,10 @@
 package com.spring.udemy.advancedmappings.hibernatejpacrud.dao;
 
+import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Course;
 import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Instructor;
 import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.InstructorDetail;
+
+import java.util.List;
 
 public interface AppDAO {
 
@@ -10,4 +13,6 @@ public interface AppDAO {
     void deleteInstructorById(int id);
     InstructorDetail findInstructorDetailById(int id);
     void deleteInstructorDetailById(int id);
+    List<Course> findCoursesByInstructorId(int id);
+    Instructor findInstructorByIdJoinFetch(int id);
 }
