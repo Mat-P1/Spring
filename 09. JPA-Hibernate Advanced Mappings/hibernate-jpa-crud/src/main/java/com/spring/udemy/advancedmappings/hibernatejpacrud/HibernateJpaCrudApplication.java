@@ -22,14 +22,17 @@ public class HibernateJpaCrudApplication {
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
         // First create instructor then test the other methods
         return runner -> // createInstructor(appDAO);
-                         // findInstructor(appDAO);
-                         // deleteInstructor(appDAO);
-                         // findInstructorDetail(appDAO);
-                         // deleteInstructorDetail(appDAO);
-                         // createInstructorWithCourses(appDAO);
-                         // findInstructorWithCourses(appDAO);
-                         // findCoursesForInstructor(appDAO);
-         findInstructorWithCoursesJoinFetch(appDAO);
+            // findInstructor(appDAO);
+            // deleteInstructor(appDAO);
+            // findInstructorDetail(appDAO);
+            // deleteInstructorDetail(appDAO);
+            // createInstructorWithCourses(appDAO);
+            // findInstructorWithCourses(appDAO);
+            // findCoursesForInstructor(appDAO);
+            // findInstructorWithCoursesJoinFetch(appDAO);
+            // updateInstructor(appDAO);
+            // updateCourse(appDAO);
+        deleteCourse(appDAO);
     }
 
     private void createInstructor(AppDAO appDAO) {
@@ -105,7 +108,7 @@ public class HibernateJpaCrudApplication {
     private void createInstructorWithCourses(AppDAO appDAO) {
 
         // Create instructor
-        Instructor instructor4 = new Instructor("Mat", "Mustang", "roy@email.com");
+        Instructor instructor4 = new Instructor("Mat", "Mustang", "mat@email.com");
         Instructor instructor5 = new Instructor("Roy", "Elric", "ed@email.com");
         Instructor instructor6 = new Instructor("Alfred", "Elric", "al@email.com");
 
@@ -176,5 +179,55 @@ public class HibernateJpaCrudApplication {
         System.out.println("Instructor: " + instructor);
 
         System.out.println("Associated courses: " + instructor.getCourses());
+    }
+
+    private void updateInstructor(AppDAO appDAO) {
+
+        int id = 1;
+
+        // Find instructor
+        System.out.println("Finding instructor: " + id);
+        Instructor instructor = appDAO.findInstructorById(id);
+        System.out.println(instructor);
+
+        // Update data
+        System.out.println("Updating instructor...");
+        instructor.setLastName("Roy");
+        instructor.setEmail("roy@email.com");
+
+        // Update instructor with Merge
+        appDAO.update(instructor);
+
+        System.out.println("Instructor updated...");
+        System.out.println(instructor);
+    }
+
+    private void updateCourse(AppDAO appDAO) {
+
+        int id = 1;
+
+        // Find instructor
+        System.out.println("Finding course: " + id);
+        Course course = appDAO.findCourseById(id);
+        System.out.println(course);
+
+        // Update data
+        System.out.println("Updating course...");
+        course.setTitle("Programming Paradigms");
+
+        // Update instructor with Merge
+        appDAO.update(course);
+
+        System.out.println("Course updated...");
+        System.out.println(course);
+    }
+
+    private void deleteCourse(AppDAO appDAO) {
+
+        int id = 1;
+
+        System.out.println("Deleting course: " + id);
+        appDAO.deleteCourseById(id);
+        System.out.println("Done!");
     }
 }
