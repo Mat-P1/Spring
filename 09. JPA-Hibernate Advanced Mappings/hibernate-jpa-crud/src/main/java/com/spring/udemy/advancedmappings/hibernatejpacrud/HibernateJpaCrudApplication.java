@@ -4,6 +4,7 @@ import com.spring.udemy.advancedmappings.hibernatejpacrud.dao.AppDAO;
 import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Course;
 import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Instructor;
 import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.InstructorDetail;
+import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,18 +22,28 @@ public class HibernateJpaCrudApplication {
     @Bean
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
         // First create instructor then test the other methods
-        return runner -> // createInstructor(appDAO);
-            // findInstructor(appDAO);
-            // deleteInstructor(appDAO);
-            // findInstructorDetail(appDAO);
-            // deleteInstructorDetail(appDAO);
-            // createInstructorWithCourses(appDAO);
-            // findInstructorWithCourses(appDAO);
-            // findCoursesForInstructor(appDAO);
-            // findInstructorWithCoursesJoinFetch(appDAO);
-            // updateInstructor(appDAO);
-            // updateCourse(appDAO);
-        deleteCourse(appDAO);
+
+        return runner ->
+                /** Bidirectional */
+
+                // createInstructor(appDAO);
+                // findInstructor(appDAO);
+                // deleteInstructor(appDAO);
+                // findInstructorDetail(appDAO);
+                // deleteInstructorDetail(appDAO);
+                // createInstructorWithCourses(appDAO);
+                // findInstructorWithCourses(appDAO);
+                // findCoursesForInstructor(appDAO);
+                // findInstructorWithCoursesJoinFetch(appDAO);
+                // updateInstructor(appDAO);
+                // updateCourse(appDAO);
+                // deleteCourse(appDAO);
+
+                /** Unidirectional */
+
+                // createCourseAndReviews(appDAO);
+                // retrieveCourseAndReviews(appDAO);
+            deleteCourseAndReviews(appDAO);
     }
 
     private void createInstructor(AppDAO appDAO) {
@@ -226,6 +237,43 @@ public class HibernateJpaCrudApplication {
 
         int id = 1;
 
+        System.out.println("Deleting course: " + id);
+        appDAO.deleteCourseById(id);
+        System.out.println("Done!");
+    }
+
+    private void createCourseAndReviews(AppDAO appDAO) {
+
+        // Create course
+        Course course = new Course("Object-Oriented Programming");
+
+        // Add reviews
+        course.addReview(new Review("Great course. Loved it."));
+        course.addReview(new Review("Cool course, job well done."));
+        course.addReview(new Review("What a dumb course."));
+
+        // Save course and leverage cascade.all
+        System.out.println("Saving course...");
+        System.out.println(course);
+        System.out.println(course.getReviews());
+        appDAO.save(course);
+        System.out.println("Done!");
+    }
+
+    private void retrieveCourseAndReviews(AppDAO appDAO) {
+
+        // Get course and reviews
+        int id = 1;
+        Course course = appDAO.findCourseAndReviewsByCourseId(id);
+
+        System.out.println("Course: " + course);
+        System.out.println("Reviews " + course.getReviews());
+    }
+
+    private void deleteCourseAndReviews(AppDAO appDAO) {
+
+        int id = 1;
+        
         System.out.println("Deleting course: " + id);
         appDAO.deleteCourseById(id);
         System.out.println("Done!");
