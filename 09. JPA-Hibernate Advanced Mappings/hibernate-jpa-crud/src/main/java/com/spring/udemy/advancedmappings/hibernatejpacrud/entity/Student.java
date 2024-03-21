@@ -5,10 +5,9 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Annotate class as an entity and map to db table */
 @Entity
-@Table(name = "instructor")
-public class Instructor {
+@Table(name = "student")
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,21 +23,16 @@ public class Instructor {
     @Column(name = "email")
     private String email;
 
-    /** Set up one-to-one relationship between instructor and instructor_detail */
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "instructor_detail_id")
-    private InstructorDetail instructorDetail;
-
-    /** Set up one-to-many relationship between instructor and course */
-    @OneToMany(mappedBy = "instructor",
-               fetch = FetchType.LAZY,
-               cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                          CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "course_student",
+            joinColumns = @JoinColumn (name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
     private List<Course> courses;
 
-    public Instructor() {}
+    public Student() {}
 
-    public Instructor(String firstName, String lastName, String email) {
+    public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -76,10 +70,6 @@ public class Instructor {
         this.email = email;
     }
 
-    public InstructorDetail getInstructorDetail() {
-        return instructorDetail;
-    }
-
     public List<Course> getCourses() {
         return courses;
     }
@@ -88,29 +78,20 @@ public class Instructor {
         this.courses = courses;
     }
 
-    public void setInstructorDetail(InstructorDetail instructorDetail) {
-        this.instructorDetail = instructorDetail;
-    }
-
-    // Convenience methods for bidirectional relationships
-
     public void addCourse(Course course) {
         if (courses == null) {
             courses = new ArrayList<>();
         }
-        // Setup relationship between course object and instructor object
         courses.add(course);
-        course.setInstructor(this);
     }
 
     @Override
     public String toString() {
-        return "Instructor{" +
+        return "Student{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", instructorDetail=" + instructorDetail +
                 '}';
     }
 }

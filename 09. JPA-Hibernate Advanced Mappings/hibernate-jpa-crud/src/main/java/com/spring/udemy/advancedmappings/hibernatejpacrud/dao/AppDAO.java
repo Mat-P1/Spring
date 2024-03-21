@@ -3,6 +3,7 @@ package com.spring.udemy.advancedmappings.hibernatejpacrud.dao;
 import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Course;
 import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Instructor;
 import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.InstructorDetail;
+import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Student;
 
 import java.util.List;
 
@@ -21,4 +22,8 @@ public interface AppDAO {
     void deleteCourseById(int id);
     void save(Course course);
     Course findCourseAndReviewsByCourseId(int id);
+    Course findCourseAndStudentsByCourseId(int id);
+    Student findStudentAndCoursesByStudentId(int id);
+    void update(Student student);
+    void deleteStudentById(int id);
 }

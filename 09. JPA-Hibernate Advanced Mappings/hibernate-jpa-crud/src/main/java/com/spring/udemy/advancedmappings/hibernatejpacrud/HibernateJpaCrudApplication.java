@@ -1,10 +1,7 @@
 package com.spring.udemy.advancedmappings.hibernatejpacrud;
 
 import com.spring.udemy.advancedmappings.hibernatejpacrud.dao.AppDAO;
-import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Course;
-import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Instructor;
-import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.InstructorDetail;
-import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.Review;
+import com.spring.udemy.advancedmappings.hibernatejpacrud.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,12 +18,11 @@ public class HibernateJpaCrudApplication {
 
     @Bean
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
-        // First create instructor then test the other methods
-
         return runner ->
-                /** Bidirectional */
 
-                // createInstructor(appDAO);
+                /** One-to-One and One-to-Many */
+
+                 createInstructor(appDAO);
                 // findInstructor(appDAO);
                 // deleteInstructor(appDAO);
                 // findInstructorDetail(appDAO);
@@ -38,12 +34,17 @@ public class HibernateJpaCrudApplication {
                 // updateInstructor(appDAO);
                 // updateCourse(appDAO);
                 // deleteCourse(appDAO);
-
-                /** Unidirectional */
-
                 // createCourseAndReviews(appDAO);
                 // retrieveCourseAndReviews(appDAO);
-            deleteCourseAndReviews(appDAO);
+                // deleteCourseAndReviews(appDAO);
+
+                /** Many-to-Many */
+
+                // createCourseAndStudents(appDAO);
+                // retrieveCourseAndStudents(appDAO);
+                // retrieveStudentAndCourses(appDAO);
+                // addMoreCoursesForStudent(appDAO);
+                // deleteStudent(appDAO);
     }
 
     private void createInstructor(AppDAO appDAO) {
@@ -74,11 +75,9 @@ public class HibernateJpaCrudApplication {
      private void findInstructor(AppDAO appDAO) {
 
         int id = 2;
-
         System.out.println("Finding instructor id: " + id);
 
         Instructor tempInstructor = appDAO.findInstructorById(id);
-
         System.out.println("Instructor: " + tempInstructor + "/nDetails: " + tempInstructor.getInstructorDetail());
     }
 
@@ -88,7 +87,6 @@ public class HibernateJpaCrudApplication {
         System.out.println("Deleting instructor id: " + id);
 
         appDAO.deleteInstructorById(id);
-
         System.out.println("Done. Instructor deleted.");
     }
 
@@ -112,7 +110,6 @@ public class HibernateJpaCrudApplication {
         System.out.println("Deleting instructor detail id: " + id);
 
         appDAO.deleteInstructorDetailById(id);
-
         System.out.println("Done. Instructor's details deleted.");
     }
 
@@ -188,7 +185,6 @@ public class HibernateJpaCrudApplication {
 
         Instructor instructor = appDAO.findInstructorByIdJoinFetch(id);
         System.out.println("Instructor: " + instructor);
-
         System.out.println("Associated courses: " + instructor.getCourses());
     }
 
@@ -208,7 +204,6 @@ public class HibernateJpaCrudApplication {
 
         // Update instructor with Merge
         appDAO.update(instructor);
-
         System.out.println("Instructor updated...");
         System.out.println(instructor);
     }
@@ -228,7 +223,6 @@ public class HibernateJpaCrudApplication {
 
         // Update instructor with Merge
         appDAO.update(course);
-
         System.out.println("Course updated...");
         System.out.println(course);
     }
@@ -267,7 +261,7 @@ public class HibernateJpaCrudApplication {
         Course course = appDAO.findCourseAndReviewsByCourseId(id);
 
         System.out.println("Course: " + course);
-        System.out.println("Reviews " + course.getReviews());
+        System.out.println("Reviews: " + course.getReviews());
     }
 
     private void deleteCourseAndReviews(AppDAO appDAO) {
@@ -276,6 +270,80 @@ public class HibernateJpaCrudApplication {
         
         System.out.println("Deleting course: " + id);
         appDAO.deleteCourseById(id);
+        System.out.println("Done!");
+    }
+
+    private void createCourseAndStudents(AppDAO appDAO) {
+
+        // Create courses
+        Course course = new Course("Object-Oriented Programming");
+
+        // Create students
+        Student student1 = new Student("John", "Smith", "johns@email.com");
+        Student student2 = new Student("Mary", "Smith", "marysth@email.com");
+        Student student3 = new Student("Josh", "Wiggins", "wjosh@email.com");
+        Student student4 = new Student("Calvin", "Hans", "calvinh@email.com");
+
+        // Add student to a course
+        course.addStudent(student1);
+        course.addStudent(student2);
+        course.addStudent(student3);
+        course.addStudent(student4);
+
+        // Save course and associated students
+        System.out.println("Saving course..." + course);
+        System.out.println("Associated students..." + course.getStudents());
+        appDAO.save(course);
+        System.out.println("Done!");
+    }
+
+    private void retrieveCourseAndStudents(AppDAO appDAO) {
+
+        // Get course and reviews
+        int id = 1;
+        Course course = appDAO.findCourseAndStudentsByCourseId(id);
+
+        System.out.println("Course: " + course);
+        System.out.println("Students: " + course.getStudents());
+    }
+
+    private void retrieveStudentAndCourses(AppDAO appDAO) {
+
+        // Get student and courses
+        int id = 1;
+        Student student = appDAO.findStudentAndCoursesByStudentId(id);
+
+        System.out.println("Student: " + student);
+        System.out.println("Courses: " + student.getCourses());
+    }
+
+    private void addMoreCoursesForStudent(AppDAO appDAO) {
+
+        int id = 1;
+        Student student = appDAO.findStudentAndCoursesByStudentId(id);
+
+        // Create more courses
+        Course course2 = new Course("Paradigms");
+        Course course3 = new Course("Algorithms");
+        Course course4 = new Course("Statistics");
+
+        // Add Courses to student
+        student.addCourse(course2);
+        student.addCourse(course3);
+        student.addCourse(course4);
+
+        // Saving student
+        System.out.println("Updating student..." + student);
+        System.out.println("Associated courses: " + student.getCourses());
+        appDAO.update(student);
+    }
+
+    private void deleteStudent(AppDAO appDAO) {
+
+        int id = 1;
+
+        System.out.println("Deleting student: " + id);
+        appDAO.deleteStudentById(id);
         System.out.println("Done!");
     }
 }
