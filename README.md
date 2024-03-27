@@ -1,4 +1,4 @@
-# Spring Boot, Spring & Hibernate
+ # Spring Boot, Spring & Hibernate
 
 Spring Core, Spring REST, Spring MVC, Spring Security, Thymeleaf, JPA, Hibernate and MySQL. 
 
@@ -15,12 +15,13 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
   - [7. Spring MVC CRUD](#7-spring-mvc-crud)
   - [8. Spring MVC Security](#8-spring-mvc-security)
   - [9. JPA/Hibernate Advanced Mappings](#9-jpahibernate-advanced-mappings)
+  - [10. AOP: Aspect-Oriented Programming](#10-aop-aspect-oriented-programming)
 
 ## 1. Spring Boot Quick Start
 
    1. **Spring Boot**
    
-         * What is Spring Boot?
+         * Spring Boot basic concepts
          * Spring Boot Initializr
          * REST API Controller
          * Spring Boot Project Structure
@@ -53,8 +54,8 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
 
 ## 3. Hibernate/JPA CRUD
 
-   * What is Hibernate?
-   * What is JPA?
+   * Hibernate basic concepts
+   * JPA basic concepts
    * JDBC
    * SQL and MySQL
    * JPA Annotations
@@ -64,7 +65,7 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
 
 ## 4. REST CRUD APIs
 
-   * What is REST?
+   * REST basic concepts
    * JSON
    * REST HTTP
    * Postman
@@ -121,3 +122,10 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
    * Join Table
    * Unidirectional and Bidirectional references
    * Entity Lifecycle
+
+## 10. AOP: Aspect-Oriented Programming
+
+   * AOP basic concepts, terminology and use cases
+   * Advantages and Disadvantages
+   * Advice Types (Before advice)
+   * Pointcut expressions
