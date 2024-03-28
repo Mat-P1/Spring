@@ -8,7 +8,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class DemoLoggingAspect {
 
-    @Before("execution(public void addAccount())")
+    // @Before("execution(public void addAccount())")
+    // @Before("execution(public void com.spring.udemy.aop.aopdemo.dao.AccountDAO.addAccount())")
+    // @Before("execution(void add*())")
+    // @Before("execution(* add*())")
+    // @Before("execution(* add*(com.spring.udemy.aop.aopdemo.Account))")
+    // @Before("execution(* add*(com.spring.udemy.aop.aopdemo.Account, ..))")
+    // @Before("execution(* com.spring.udemy.aop.aopdemo..add*(..))")
+    @Before("execution(* com.spring.udemy.aop.aopdemo.dao.*.*(..))")
     public void beforeAddAccountAdvice() {
         System.out.println("\n====>>> Executing @Before advice on addAccount()");
     }

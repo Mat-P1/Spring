@@ -1,6 +1,7 @@
 package com.spring.udemy.aop.aopdemo;
 
 import com.spring.udemy.aop.aopdemo.dao.AccountDAO;
+import com.spring.udemy.aop.aopdemo.dao.MembershipDAO;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,17 +15,22 @@ public class AopdemoApplication {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(AccountDAO accountDAO) {
+    public CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO) {
         return runner -> {
 
-            beforeAdviceDemo(accountDAO);
+            beforeAdviceDemo(accountDAO, membershipDAO);
         };
     }
 
-    private void beforeAdviceDemo(AccountDAO accountDAO) {
+    private void beforeAdviceDemo(AccountDAO accountDAO, MembershipDAO membershipDAO) {
+
+        Account account = new Account();
 
         // Call business method
-        accountDAO.addAccount();
-    }
+        accountDAO.addAccount(account, true);
+        accountDAO.doSomething();
+        membershipDAO.addMembership();
+        membershipDAO.deleteMembership();
 
+    }
 }
