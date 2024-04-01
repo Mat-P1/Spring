@@ -25,10 +25,19 @@ public class AopdemoApplication {
     private void beforeAdviceDemo(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 
         Account account = new Account();
-
-        // Call business method
+        account.setName("Test");
+        account.setLevel("Platinum");
         accountDAO.addAccount(account, true);
         accountDAO.doSomething();
+
+        // Call accountDAO getter/setter
+        accountDAO.setName("testSetter");
+        accountDAO.setServiceCode("123456");
+
+        accountDAO.getName();
+        accountDAO.getServiceCode();
+
+        // Call business method
         membershipDAO.addMembership();
         membershipDAO.deleteMembership();
 

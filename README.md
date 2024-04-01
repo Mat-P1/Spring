@@ -129,3 +129,5 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
    * Advantages and Disadvantages
    * Advice Types (Before advice)
    * Pointcut expressions
+   * Pointcut declaration
+   * Ordering advices 
