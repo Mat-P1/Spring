@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class AopdemoApplication {
 
@@ -18,7 +20,10 @@ public class AopdemoApplication {
     public CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO) {
         return runner -> {
 
-            beforeAdviceDemo(accountDAO, membershipDAO);
+            // beforeAdviceDemo(accountDAO, membershipDAO);
+            // afterReturningAdviceDemo(accountDAO);
+            // afterThrowingAdviceDemo(accountDAO);
+            afterAdviceDemo(accountDAO);
         };
     }
 
@@ -40,6 +45,50 @@ public class AopdemoApplication {
         // Call business method
         membershipDAO.addMembership();
         membershipDAO.deleteMembership();
+    }
 
+    private void afterReturningAdviceDemo(AccountDAO accountDAO) {
+
+        // Call method to find accounts
+        List<Account> accounts = accountDAO.findAccounts();
+
+        // Display accounts
+        System.out.println("\n\n Main Program: afterReturningAdviceDemo" + "\n----" + accounts + "\n");
+    }
+
+    private void afterThrowingAdviceDemo(AccountDAO accountDAO) {
+
+        // Call method to find accounts
+        List<Account> accounts = null;
+
+        try {
+            // Add boolean flag to simulate exceptions
+            boolean tripWire = true;
+            accounts = accountDAO.findAccounts(tripWire);
+
+        } catch (Exception exception) {
+            System.out.println("\n\n Main Program: Exception" + exception);
+        }
+
+        // Display accounts
+        System.out.println("\n\n Main Program: afterThrowingAdviceDemo" + "\n----" + accounts + "\n");
+    }
+
+    private void afterAdviceDemo(AccountDAO accountDAO) {
+
+        // Call method to find accounts
+        List<Account> accounts = null;
+
+        try {
+            // Add boolean flag to simulate exceptions
+            boolean tripWire = false; // change to false or true;
+            accounts = accountDAO.findAccounts(tripWire);
+
+        } catch (Exception exception) {
+            System.out.println("\n\n Main Program: Exception" + exception);
+        }
+
+        // Display accounts
+        System.out.println("\n\n Main Program: afterThrowingAdviceDemo" + "\n----" + accounts + "\n");
     }
 }
