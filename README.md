@@ -127,9 +127,11 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
 
    * AOP basic concepts, terminology and use cases
    * Advantages and Disadvantages
-   * Advice Types (Before advice, AfterReturning advice, AfterThrowing advice, After advice)
+   * Advice Types (Before advice, AfterReturning advice, AfterThrowing advice, After advice, Around advice)
    * Pointcut expressions
    * Pointcut declaration
    * Ordering advices 
    * JoinPoints
    * Post-processing data
+   * Pre-processing data
+   * Exception Handling

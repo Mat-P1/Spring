@@ -2,6 +2,7 @@ package com.spring.udemy.aop.aopdemo.aspects;
 
 import com.spring.udemy.aop.aopdemo.Account;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
@@ -55,6 +56,43 @@ public class DemoLoggingAspect {
         // Print out which method @AfterThrowing is being applied on
         String method = joinPoint.getSignature().toShortString();
         System.out.println("\n=====> Executing @After (finally) on method: " + method);
+    }
+
+    // Add new advice for @Around on the getTrafficService() method
+    @Around("execution(* com.spring.udemy.aop.aopdemo.service.*.getTrafficService(..))")
+    public Object aroundGetTraffic(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+
+        // Print out which method @Around is being applied on
+        String method = proceedingJoinPoint.getSignature().toShortString();
+        System.out.println("\n=====> Executing @Around on method: " + method);
+
+        // Get start timestamp
+        long begin = System.currentTimeMillis();
+
+
+        // Execute method
+        Object result = null;
+        try {
+            result = proceedingJoinPoint.proceed();
+        } catch (Exception exception) {
+
+            // Log exception
+            System.out.println(exception.getMessage());
+
+            // Custom message
+            // result = "Major accident!";
+            // Rethrow exception
+            throw exception;
+        }
+
+        // Get finished timestamp
+        long end = System.currentTimeMillis();
+
+        // Compute duration and display it
+        long duration = end - begin;
+
+        System.out.println("\n=====> Duration: " + duration / 1000.0 + " seconds");
+        return result;
     }
 
     private void convertAccountNamesToUpperCase(List<Account> result) {

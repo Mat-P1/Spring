@@ -2,6 +2,7 @@ package com.spring.udemy.aop.aopdemo;
 
 import com.spring.udemy.aop.aopdemo.dao.AccountDAO;
 import com.spring.udemy.aop.aopdemo.dao.MembershipDAO;
+import com.spring.udemy.aop.aopdemo.service.TrafficService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,13 +18,16 @@ public class AopdemoApplication {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO) {
+    public CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO, TrafficService trafficService) {
         return runner -> {
 
             // beforeAdviceDemo(accountDAO, membershipDAO);
             // afterReturningAdviceDemo(accountDAO);
             // afterThrowingAdviceDemo(accountDAO);
-            afterAdviceDemo(accountDAO);
+            // afterAdviceDemo(accountDAO);
+            // aroundAdviceDemo(trafficService);
+            // aroundAdviceExceptionHandlingDemo(trafficService);
+            aroundAdviceRethrowExceptionDemo(trafficService);
         };
     }
 
@@ -90,5 +94,28 @@ public class AopdemoApplication {
 
         // Display accounts
         System.out.println("\n\n Main Program: afterThrowingAdviceDemo" + "\n----" + accounts + "\n");
+    }
+
+    private void aroundAdviceDemo(TrafficService trafficService) {
+
+        System.out.println("Main program: aroundAdviceDemo" + "\nCalling: getTrafficService()");
+        String data = trafficService.getTrafficService();
+        System.out.println("Results: " + data);
+    }
+
+    private void aroundAdviceExceptionHandlingDemo(TrafficService trafficService) {
+
+        System.out.println("Main program: aroundAdviceExceptionHandlingDemo" + "\nCalling: getTrafficService()");
+        boolean tripWire = true;
+        String data = trafficService.getTrafficService(tripWire);
+        System.out.println("Results: " + data);
+    }
+
+    private void aroundAdviceRethrowExceptionDemo(TrafficService trafficService) {
+
+        System.out.println("Main program: aroundAdviceRethrowExceptionDemo" + "\nCalling: getTrafficService()");
+        boolean tripWire = true;
+        String data = trafficService.getTrafficService(tripWire);
+        System.out.println("Results: " + data);
     }
 }
