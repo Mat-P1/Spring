@@ -135,3 +135,4 @@ Key Spring Boot features: Core, Annotations, Java Config, Spring REST, Spring MV
    * Post-processing data
    * Pre-processing data
    * Exception Handling
+   * Applying AOP in a CRUD APP
